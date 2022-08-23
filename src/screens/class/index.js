@@ -1,4 +1,6 @@
+import AsyncAwait from './AsyncAwait';
 import Callback from './Callback';
-import PromiseScreen from './PromiseScreen';
+import Promises from './Promises';
+import PromisesAll from './PromisesAll';
 
-export {Callback, PromiseScreen as Promise};
+export {Callback, Promises, AsyncAwait, PromisesAll};

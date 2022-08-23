@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 
-export default class PromiseScreen extends Component {
+export default class PromisesAll extends Component {
   state = {
     text: 'Text',
   };
@@ -14,22 +14,20 @@ export default class PromiseScreen extends Component {
     });
   };
 
-  callLastName = first => {
+  callLastName = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(`${first} Aryudi Syidik`);
+        resolve('Aryudi Syidik');
       }, 1000);
     });
   };
 
   onClick = () => {
-    this.callFirstName()
-      .then(firstResult => {
-        return this.callLastName(firstResult);
-      })
-      .then(lastResult => {
-        this.setState({text: lastResult});
-      });
+    Promise.all([this.callFirstName(), this.callLastName()]).then(
+      ([firstResult, lastResult]) => {
+        this.setState({text: `${firstResult} ${lastResult}`});
+      },
+    );
   };
 
   render() {
