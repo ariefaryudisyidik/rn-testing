@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {LogBox, SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {FAxios} from './src/screens/';
 
@@ -9,6 +9,8 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     flex: 1,
   };
+
+  LogBox.ignoreLogs(['Remote debugger']);
 
   return (
     <SafeAreaView style={backgroundStyle}>

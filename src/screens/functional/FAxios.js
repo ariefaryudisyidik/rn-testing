@@ -1,15 +1,21 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
-import {Text, View} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 
-const Item = ({id, email, firstName, lastName}) => {
+const Item = ({users}) => {
   return (
-    <View style={{marginBottom: 8}}>
-      <Text>{id}</Text>
-      <Text>{email}</Text>
-      <Text>{firstName}</Text>
-      <Text>{lastName}</Text>
-    </View>
+    <FlatList
+      data={users}
+      renderItem={({item: user}) => (
+        <View style={{padding: 16}}>
+          <Text>{user.id}</Text>
+          <Text>{user.email}</Text>
+          <Text>{user.first_name}</Text>
+          <Text>{user.last_name}</Text>
+        </View>
+      )}
+      keyExtractor={user => user.id}
+    />
   );
 };
 
@@ -19,7 +25,6 @@ const FAxios = () => {
   const getData = async () => {
     const response = await axios.get('https://reqres.in/api/users?page=2');
     setUsers(response.data.data);
-    console.log(users);
   };
 
   useEffect(() => {
@@ -28,16 +33,7 @@ const FAxios = () => {
 
   return (
     <View>
-      {users.map(user => {
-        return (
-          <Item
-            id={user.id}
-            email={user.email}
-            firstName={user.first_name}
-            lastName={user.last_name}
-          />
-        );
-      })}
+      <Item users={users} />
     </View>
   );
 };
