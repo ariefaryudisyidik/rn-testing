@@ -1,2 +1,3 @@
 import FAxios from './FAxios';
-export {FAxios};
+import FSwipe from './FSwipe';
+export {FAxios, FSwipe};
